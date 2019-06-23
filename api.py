@@ -2,11 +2,11 @@ from flask import Flask, request, jsonify, render_template
 from flask_restful import Api, Resource
 import os
 import numpy as np
-from sklearn.externals import joblib
+import joblib
 
 
 path = os.path.dirname(os.path.realpath(__file__))
-analytics_path = os.path.join(path, 'analytics')
+analytics_path = os.path.join(path, 'ml')
 iris_model_file = os.path.join(analytics_path, 'iris_model.pkl')
 
 # si estas sentencias se ponen acá, los objetos se cargan en la memoria del servidor al momento de iniciar la API,

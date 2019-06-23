@@ -44,18 +44,15 @@
     </div>
     <script>
         function getForecast() {
-            var sepal_length = document.getElementById('sepal_length').value;
-            var sepal_width = document.getElementById('sepal_width').value;
-            var petal_length = document.getElementById('petal_length').value;
-            var petal_width = document.getElementById('petal_width').value;
+            const sepal_length = document.getElementById('sepal_length').value;
+            const sepal_width = document.getElementById('sepal_width').value;
+            const petal_length = document.getElementById('petal_length').value;
+            const petal_width = document.getElementById('petal_width').value;
             $.ajax({
                 url: '{{ url_for('iris', _external=True) }}',
                 type: 'POST',
                 contentType: 'application/json',
-                data: JSON.stringify({sepal_length: sepal_length,
-                                      sepal_width: sepal_width,
-                                      petal_length: petal_length,
-                                      petal_width: petal_width}),
+                data: JSON.stringify({sepal_length, sepal_width, petal_length, petal_width}),
                 success: function (data) {
                     $('#json').html(JSON.stringify(data, null, 2));
                     buildTable(data);
@@ -63,22 +60,22 @@
 		    });
         }
         function buildTable(data) {
-            var tabDiv = document.getElementById('records');
+            const tabDiv = document.getElementById('records');
             tabDiv.innerHTML = '';
             if (data.predicted) {
-                var _table = document.createElement('table');
+                const _table = document.createElement('table');
                 _table.className = 'table table-striped table-bordered';
-                var _tableHead = _table.createTHead();
-                var _tr = _tableHead.insertRow();
+                const _tableHead = _table.createTHead();
+                let _tr = _tableHead.insertRow();
                 ['Predicted', 'Probability'].forEach(function (elm) {
-                    var _th = document.createElement('th');
+                    const _th = document.createElement('th');
                     _th.innerHTML = elm;
                     _tr.appendChild(_th);
                 });
-                var _tableBody = document.createElement('tbody');
-                var _tr = document.createElement('tr');
+                const _tableBody = document.createElement('tbody');
+                _tr = document.createElement('tr');
                 ['predicted', 'probability'].forEach(function (elm) {
-                    var _td = document.createElement('td');
+                    const _td = document.createElement('td');
                     _td.innerHTML = data[elm];
                     _tr.appendChild(_td);
                 });
